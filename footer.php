@@ -2,7 +2,7 @@
 				<hr width=500 size=3 NOSHADE color="">
 			</div>
 		</table>
-	<center><h3>hsjobs.org | All Rights Reserved | 2010-2011 | parasjain{at}parasjain.com</h3></center>
+	<center><h5>hsjobs.org | All Rights Reserved | 2010-2011 | hsjobs{at}hsjobs.com</h5></center>
 </div>
 </center>
 <script type="text/javascript">

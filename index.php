@@ -1,3 +1,3 @@
-<?php $title="Paras Jain"; include "header.php"; ?>
-hi
+<?php $title="HSJobs"; require_once "header.php"; ?>
+Hi.
 <? include "footer.php"; ?>

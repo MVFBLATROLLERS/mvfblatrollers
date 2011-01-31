@@ -1,4 +1,6 @@
  <?php
+require_once("include/preload.php");
+
 $green_bg =  "http://img718.imageshack.us/img718/9062/greengradient.jpg";
 $greyg_bg =  "http://img441.imageshack.us/img441/3664/greygradient.jpg"; // too slow
 $greys_bg  = "http://img192.imageshack.us/img192/1545/greystripes.jpg"; // image too small
@@ -28,7 +30,7 @@ $theme = "cupertino";
 				  controller: ".jFlowControl", // must be class, use . sign  
 				  slideWrapper : "#jFlowSlide", // must be id, use # sign  
 				  selectedWrapper: "jFlowSelected",  // just pure text, no sign  
-				  width: "610px",  // this is the width for the content-slider  
+				  width: "200px",  // this is the width for the content-slider  
 				 height: "235px",  // this is the height for the content-slider  
 				 duration: 400,  // time in miliseconds to transition one slide  
 				 prev: ".jFlowPrev", // must be class, use . sign  
@@ -72,18 +74,26 @@ $theme = "cupertino";
     <body>
     <img src="<? echo $bg; ?>" id="bg" />
 	<center>
-		<table border=0 width=100% cellpadding=5px style="width:1100;">
+		<table border=0  cellpadding=5px ;">
 			<td cellpadding='5px'>
-				<td><img src="http://degree7.com/hsjobs/images/imprezz.jpg" width=300 height=100></td>
+				<td><img src="images/logo.png" height=100px></td>
 				<td>
-					<div class="nav-wrap" style="width:800px;">
+					<div class="nav-wrap";">
 						<ul class="group" id="example-one">
 						<li class="current_page_item link_home"><a href="index.php" style="color: #C00000;">HOME</a></li>
-						<li><a href="#">ABOUT</a></li>
-						<li><a href="#">ART</a></li>
-						<li><a href="#">CLIENTS</a></li>
+						<li><a href="#">SEARCH</a></li>
+						<li><a href="#">STUDENTS</a></li>
+						<li><a href="#">EMPLOYERS</a></li>
 						<li><a href="#">STAFFING</a></li>
 						<li><a href="#">CONTACT US</a></li>
+<?php
+	if(User::is_logged_in()){
+		echo("<li><a>Hello, {$user->get_username()}</a></li><li><a href=\"logout.php\">LOGOUT</a></li>");
+	}
+	else{
+		echo("<li></li><li><a href=\"login.php\">LOGIN</a></li>");
+	}
+?>
 					 </ul>
 					</div>
 				</td>

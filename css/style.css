@@ -1,10 +1,13 @@
 body
 {
-  font:62.5% "Trebuchet MS", sans-serif;
+  font:100% "Trebuchet MS", sans-serif;
   color:#;
   margin:50px;
 }
-
+#maincontent
+{
+  font-size:12pt;
+}
 .demoHeaders
 {
   margin-top:2em;
@@ -187,7 +190,7 @@ a:hover
   background-color:#3AB7FF;
   border-top:2px solid #FFF;
   border-bottom:2px solid #FFF;
-  margin:50px auto;
+  margin:10px auto;
 }
 
 .group:after
@@ -209,13 +212,13 @@ a:hover
 {
   list-style:none;
   position:relative;
-  width:960px;
   margin:0 auto;
 }
 
 #example-one li
 {
   display:inline;
+  padding-right: 5px;
 }
 
 #example-one li a

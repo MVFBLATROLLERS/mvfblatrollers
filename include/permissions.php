@@ -1,0 +1,12 @@
+<?php
+$permissions_list = array(
+    "SUBMIT SOLUTIONS",
+    "SEE PROBLEMS",
+    "GRADE SOLUTIONS",
+    "CREATE TESTS",
+    "DOWNLOAD FILES EARLY",
+    "VIEW ALL SOLUTIONS",
+    "VIEW USER DATA",
+    "UPLOAD OFFICIAL SOLUTIONS",
+)
+?>
