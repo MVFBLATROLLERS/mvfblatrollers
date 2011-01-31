@@ -1,0 +1,272 @@
+body
+{
+  font:62.5% "Trebuchet MS", sans-serif;
+  color:#;
+  margin:50px;
+}
+
+.demoHeaders
+{
+  margin-top:2em;
+}
+
+#dialog_link
+{
+  text-decoration:none;
+  position:relative;
+  padding:.4em 1em .4em 20px;
+}
+
+#dialog_link span.ui-icon
+{
+  position:absolute;
+  left:.2em;
+  top:50%;
+  margin:-8px 5px 0 0;
+}
+
+ul#icons
+{
+  margin:0;
+  padding:0;
+}
+
+ul#icons li
+{
+  position:relative;
+  cursor:pointer;
+  float:left;
+  list-style:none;
+  margin:2px;
+  padding:4px 0;
+}
+
+ul#icons span.ui-icon
+{
+  float:left;
+  margin:0 4px;
+}
+
+img#bg
+{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+#content
+{
+  position:relative;
+  z-index:1;
+}
+
+#text
+{
+  font-size:2em;
+  display:block;
+  line-height:1em;
+  color:#666;
+  background-color:transparent;
+  white-space:nowrap;
+}
+
+#text:before,#text:after
+{
+  content:"Paras Jain. Need I say more?";
+  display:block;
+}
+
+#text:before
+{
+  margin-bottom:-1.05em;
+  margin-left:.1ex;
+  color:#ccc;
+  background-color:transparent;
+}
+
+#text:after
+{
+  margin-top:-1.05em;
+  margin-left:-.1ex;
+  color:#23A2FC;
+  background-color:transparent;
+}
+
+#slideshow
+{
+  width:640px;
+  height:263px;
+  background:transparent url(img/bg_slideshow.jpg) no-repeat 0 0;
+  position:relative;
+  margin:0 auto;
+}
+
+#slideshow #slidesContainer
+{
+  width:560px;
+  height:263px;
+  overflow:auto;
+  position:relative;
+  margin:0 auto;
+}
+
+#slideshow #slidesContainer .slide
+{
+  width:540px;
+  height:263px;
+  margin:0 auto;
+}
+
+.control
+{
+  display:block;
+  width:39px;
+  height:263px;
+  text-indent:-10000px;
+  position:absolute;
+  cursor:pointer;
+}
+
+#leftControl
+{
+  top:0;
+  left:0;
+  background:transparent url(img/control_left.jpg) no-repeat 0 0;
+}
+
+#rightControl
+{
+  top:0;
+  right:0;
+  background:transparent url(img/control_right.jpg) no-repeat 0 0;
+}
+
+//styling for sliders
+.slide h2,.slide p
+{
+  margin:15px;
+}
+
+.slide h2
+{
+  font:italic 24px Georgia, "Times New Roman", Times, serif;
+  color:#ccc;
+  letter-spacing:-1px;
+}
+
+.slide img
+{
+  float:right;
+  margin:0 15px;
+}
+
+a
+{
+  color:#B20000;
+  font-weight:700;
+  text-decoration:none;
+}
+
+a:hover
+{
+  text-decoration:underline;
+}
+
+.mainContent
+{
+  border:1px solid #494e52;
+  background-color:#fff;
+  padding:8px;
+}
+
+.nav-wrap
+{
+  background-color:#3AB7FF;
+  border-top:2px solid #FFF;
+  border-bottom:2px solid #FFF;
+  margin:50px auto;
+}
+
+.group:after
+{
+  visibility:hidden;
+  display:block;
+  font-size:0;
+  content:" ";
+  clear:both;
+  height:0;
+}
+
+:first-child+html .group
+{
+  zoom:1;
+}
+
+#example-one
+{
+  list-style:none;
+  position:relative;
+  width:960px;
+  margin:0 auto;
+}
+
+#example-one li
+{
+  display:inline;
+}
+
+#example-one li a
+{
+  color:#222222;
+  font-size:14px;
+  display:block;
+  float:left;
+  text-decoration:none;
+  text-transform:uppercase;
+  padding:6px 10px 4px;
+}
+
+#example-one li a:hover
+{
+  color:#FFF;
+}
+
+#magic-line
+{
+  position:absolute;
+  bottom:-2px;
+  left:0;
+  width:100px;
+  height:2px;
+  background:#000;
+}
+
+a:link,a:visited
+{
+  color:#fff;
+  text-decoration:none;
+}
+
+a img
+{
+  border:0;
+}
+
+//slider
+
+#jFlowSlide{ background:#DBF3FD; font-family: Georgia; }
+#myController { font-family: Georgia; font-size:15px; padding:2px auto;  width:610px; background:#3AB7FF; }
+#myController span.jFlowSelected { background:#43A0D5;margin-right:0px; }
+
+.slide-wrapper { padding: 5px; }
+.slide-thumbnail { width:300px; float:left; }
+.slide-thumbnail img {max-width:300px; }
+.slide-details { width:290px; float:right; margin-left:10px;}
+.slide-details h2 { font-size:1.5em; font-style: italic; font-weight:normal; line-height: 1; margin:0; }
+.slide-details .description { margin-top:10px; }
+
+.jFlowControl, .jFlowPrev, .jFlowNext { color:#FFF; cursor:pointer; padding-left:5px; padding-right:5px; padding-top:2px; padding-bottom:2px; }
+.jFlowControl:hover, .jFlowPrev:hover, .jFlowNext:hover { background: #43A0D5; }
