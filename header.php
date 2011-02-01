@@ -74,8 +74,7 @@ $theme = "cupertino";
     <body>
     <img src="<? echo $bg; ?>" id="bg" />
 	<center>
-		<table border=0  cellpadding=5px ;">
-			<td cellpadding='5px'>
+		<table border=0  cellpadding=5px ">
 				<td><img src="images/logo.png" height=100px></td>
 				<td>
 					<div class="nav-wrap";">
@@ -91,12 +90,13 @@ $theme = "cupertino";
 		echo("<li><a>Hello, {$user->get_username()}</a></li><li><a href=\"logout.php\">LOGOUT</a></li>");
 	}
 	else{
-		echo("<li></li><li><a href=\"login.php\">LOGIN</a></li>");
+		echo("<li><a href=\"login.php\">LOGIN</a></li>");
 	}
 ?>
 					 </ul>
 					</div>
 				</td>
-	<div id=content width=900px>
-		<table border=0 width=100% cellpadding=5px>
-			<div id="maincontent" style="">
+		<tr>
+			<td colspan="2">
+				<div id=content width=900px>
+				<div id="maincontent" style="">

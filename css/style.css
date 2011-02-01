@@ -4,9 +4,14 @@ body
   color:#;
   margin:50px;
 }
+#error{
+  color:red;
+}
 #maincontent
 {
   font-size:12pt;
+  text-align: left;
+  margin-left:50px;
 }
 .demoHeaders
 {
@@ -168,7 +173,7 @@ img#bg
 
 a
 {
-  color:#B20000;
+  color:#0000B2;
   font-weight:700;
   text-decoration:none;
 }
@@ -247,9 +252,9 @@ a:hover
   background:#000;
 }
 
-a:link,a:visited
+a#example-one:link,a#example-one:visited
 {
-  color:#fff;
+  color:#c000ff;
   text-decoration:none;
 }
 
