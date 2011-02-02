@@ -10,15 +10,15 @@ $exists = $upload->get_by_id($fileid);
 $permissions = $upload->get_permissions();
 
 if (!$exists) { 
-    print_err("File does not exist.");
+    trigger_error("File does not exist.");
 }
 else if(is_array($permissions) && (!$user->check_permissions_arr($permissions))){ 
     // not allowed
-    print_err("File does not exist."); 
+    trigger_error("File does not exist."); 
 }
 else if($upload->is_time_hidden($user->get_id()) && !$user->check_permissions("DOWNLOAD FILES EARLY")){
     // too early
-    print_err("You can't download the file yet.");
+    trigger_error("You can't download the file yet.");
 }
 else{
         /* borrowed from http://www.php.net/manual/en/function.readfile.php#99406

@@ -7,7 +7,7 @@ else{
 if(@$_POST['submitted'] === "true"){
     $userid = User::login($_POST['email'],$_POST['password']);
     if($userid){
-        $user->get_by_id($userid);
+        $user = new User($userid);
     }
 }
 

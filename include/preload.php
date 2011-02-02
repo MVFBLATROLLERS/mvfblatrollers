@@ -6,9 +6,9 @@ require_once("user.php");
 better_session_start();
 
 //global user object for authentication
-$user = new User;
+
 if(isset($_SESSION['userid'])){
-    if($user->get_by_id($_SESSION['userid'])){
+    if($user = new User($_SESSION['userid'])){
         User::set_logged_in(true);
     }
     else{

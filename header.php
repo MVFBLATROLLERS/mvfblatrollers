@@ -81,8 +81,8 @@ $theme = "cupertino";
 						<ul class="group" id="example-one">
 						<li class="current_page_item link_home"><a href="index.php" style="color: #C00000;">HOME</a></li>
 						<li><a href="#">SEARCH</a></li>
-						<li><a href="#">STUDENTS</a></li>
-						<li><a href="#">EMPLOYERS</a></li>
+						<li><a href="students.php">STUDENTS</a></li>
+						<li><a href="employers.php">EMPLOYERS</a></li>
 						<li><a href="#">STAFFING</a></li>
 						<li><a href="#">CONTACT US</a></li>
 <?php

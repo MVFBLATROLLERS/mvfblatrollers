@@ -13,6 +13,9 @@ class User {
     protected $data;
     protected static $logged_in; //bool
     
+	public function __construct($userid){
+		$this->get_by_id($userid);
+	}
     /* login and logout must be called before output begins!!! */
     public static function login($email, $password){
         better_session_start();
@@ -23,13 +26,16 @@ class User {
 
         // check if email address is valid
         if(!Validate::email($email)){
-            print_err('Invalid email address.');
+            trigger_error('Invalid email address.');
             return FALSE;
         }
         // email column is indexed, so search that
         $result = $GLOBALS['mysqli']->query( "SELECT * FROM users WHERE email = '$email'");
         $user = $result->fetch_array(MYSQLI_ASSOC);
-        if($user['password_hash'] === $hash){
+		/*if(!is_null($user['activation'])){
+			trigger_error('Account is not activated! <a href="resend_activation.php">Resend activation email</a>');
+		}
+        else */if($user['password_hash'] === $hash){
             // login successful, write userid into session
             $_SESSION['userid'] = $user['userid'];
             self::set_logged_in(TRUE);
@@ -37,7 +43,7 @@ class User {
 
         }
         else{
-            print_err('Invalid email/password combination.');
+            trigger_error('Invalid email/password combination.');
             return FALSE;
         }
     }
@@ -48,6 +54,33 @@ class User {
         better_session_start();
     }
 
+	public static function activate($code){
+		$result = $GLOBALS['mysqli']->query( "SELECT * FROM users WHERE activation = '$code'");
+		if($result->fetch_array(MYSQLI_ASSOC)){
+			if($GLOBALS['mysqli']->query( "UPDATE users SET activation = NULL WHERE activation = '$code'")){
+				return true;
+			}
+			else{
+				trigger_error("Database error.");
+			}
+		}
+		else{
+			trigger_error("Account is already activated or doesn't exist.");
+		}
+		return false;
+	}
+	
+	public static function send_activation_email($userid){
+		global $mysqli;
+		$result = $mysqli->query("select activation from users where userid = $userid");
+		$array = $result->fetch_array();
+		mail($email, "Activation email for HSJobs", "Click this link to activate your account: \n
+			<http://192.168.189.100/activate.php?id={$array['activation']}>\n
+			If this fails, go to <http://192.168.189.100/activate.php> and enter the code\n
+			$activation", "From: do_not_reply@hsjobs.org");
+
+	}
+	
     public static function is_logged_in(){
         if(self::$logged_in){
             return true;
@@ -88,38 +121,40 @@ class User {
     	
         $hash = hash(HASH_ALG, $password.$email); //hash salt is email
 
+		$activation = hash(HASH_ALG, rand(0, 4294967295).$username);
         //not really necessary, but just in case.
         $escaped_username = $GLOBALS['mysqli']->real_escape_string( $username);
         $escaped_hash = $GLOBALS['mysqli']->real_escape_string( $hash);
         $escaped_email = $GLOBALS['mysqli']->real_escape_string( $email);
+		$escaped_activation =  $GLOBALS['mysqli']->real_escape_string( $activation);
         $data_to_write = $GLOBALS['mysqli']->real_escape_string(serialize(array('usertype'=>$usertype,'permissions'=>$permissions,'data'=>$data)));
-
+		
         //everything is fine: write team info to database
-        if(!$GLOBALS['mysqli']->query( "INSERT INTO users (username, email, password_hash, data) VALUES ('$escaped_username', '$escaped_email', '$escaped_hash', '$data_to_write')")){
-            print_err("Database failure, please contact us if the problem persists.");
+        if(!$GLOBALS['mysqli']->query( "INSERT INTO users (username, email, password_hash, activation, data) VALUES ('$escaped_username', '$escaped_email', '$escaped_hash', '$activation', '$data_to_write')")){
+            trigger_error("Database failure, please contact us if the problem persists.");
             return FALSE;
         }
         else{
-            // login and get user information
-            if($userid = User::login($email, $password))
-            self::$logged_in = true;
+			$userid = $GLOBALS['mysqli']->insert_id;
+			$this->send_activation_email($userid);
             // return userid
 			return $userid;
         }
     }
 
+	
     public function change_password($old_password, $new_password, $verify){
 
 		$hash = hash(HASH_ALG, $new_password.$this->email);
 
 		if($new_password !== $verify){
-			print_err("Passwords do not match.");
+			trigger_error("Passwords do not match.");
 		}
 		else if(hash(HASH_ALG,$old_password.$this->email) !== $this->password_hash){
-			print_err("Old password is incorrect.");
+			trigger_error("Old password is incorrect.");
         }
 		else if(!$GLOBALS['mysqli']->query( "UPDATE users SET password_hash = '{$hash}' WHERE userid = {$this->userid}")){
-				print_err("Database failure");
+				trigger_error("Database failure");
 		}
 		else{
 			return true;

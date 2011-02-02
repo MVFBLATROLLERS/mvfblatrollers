@@ -13,7 +13,7 @@ class Validate{
 		if($email === "root@localhost")
 			return true;
 		else
-			return filter_var($email, FILTER_VALIDATE_EMAIL) && (strpos($string, "\0") === FALSE);
+			return filter_var($email, FILTER_VALIDATE_EMAIL) && (strpos($email, "\0") === FALSE);
     }
 }
 ?>

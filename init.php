@@ -1,3 +1,8 @@
+<?php
+require_once("include/db.php");
+
+$query = 
+<<<QUERY
 /* this will delete the database!!! */
 DROP DATABASE hsjobs;
 CREATE DATABASE hsjobs;
@@ -16,8 +21,7 @@ CREATE TABLE users(
 CREATE TABLE employers(
 	userid INT UNIQUE,
 	company VARCHAR(256),
-	category_id INT,
-	details VARCHAR(5000)
+	details VARCHAR(10000)
 );
 
 
@@ -27,12 +31,14 @@ CREATE TABLE students(
 	resume INT,
 	location VARCHAR(256),
 	about_me VARCHAR(10000),
+	real_name VARCHAR(256)
 	/*
 	school VARCHAR(256),
 	interests VARCHAR(256),
 	skills VARCHAR(256),
 	*/
 );
+
 
 CREATE TABLE student_looking_for(
 	student_id INT,
@@ -67,7 +73,12 @@ SET PASSWORD FOR 'hsjobs'@'localhost' = PASSWORD('hsjobs');
 GRANT ALL ON hsjobs.* to 'hsjobs'@'localhost' IDENTIFIED BY 'hsjobs';
 
 FLUSH PRIVILEGES;
+QUERY;
 
-
-
-
+if($mysqli->multi_query($query)){
+	echo "done.";
+}
+else{
+	echo "fail.";
+}
+?>

@@ -37,7 +37,7 @@ class UploadedFile{
         $end_time = is_null($end_time)?"NULL":(int) $end_time;
         if(!$GLOBALS['mysqli']->query("INSERT INTO dl_time_exceptions
         (userid, fileid, start_time, end_time) VALUES ({$userid}, {$fileid}, {$start_time}, {$end_time})")){
-        print_err("Database failure.");
+        trigger_error("Database failure.");
         return false;
         }
         else return true;
@@ -46,18 +46,18 @@ class UploadedFile{
     private static function verify_temporary_file($file_form_name){
         global $upload_allowed_types;
         if($_FILES[$file_form_name]["error"] !=  UPLOAD_ERR_OK){
-            print_err("Error uploading file. Errno:". $_FILES[$file_form_name]["error"] ); // upload errors
+            trigger_error("Error uploading file. Errno:". $_FILES[$file_form_name]["error"] ); // upload errors
             return false;
         }
         else if($_FILES[$file_form_name]["size"] > MAX_FILE_SIZE){
-            print_err("File is too large".$_FILES[$file_form_name]["size"].MAX_FILE_SIZE ); //check file size
+            trigger_error("File is too large".$_FILES[$file_form_name]["size"].MAX_FILE_SIZE ); //check file size
             return false;
         }
         else{
             foreach($upload_allowed_types as $name => $type){ //check each type
                 if ($_FILES[$file_form_name]["type"] == $type) return true;
             }
-            print_err("File type is invalid");
+            trigger_error("File type is invalid");
             return false;
         }
     }
@@ -91,13 +91,13 @@ class UploadedFile{
                 '{$to_write_permissions}',
                 {$hide_until})")
                 ){
-                    print_err("Database error");
+                    trigger_error("Database error");
                     return false;
                 }
 				
                 $fileid = $GLOBALS['mysqli']->insert_id;
                 if(!move_uploaded_file($_FILES[$file_form_name]['tmp_name'], UPLOAD_DIR.$fileid)){
-                    print_err("Filesystem error");
+                    trigger_error("Filesystem error");
                     return false;
                 }
                 else{
@@ -114,12 +114,12 @@ class UploadedFile{
         if($result->fetch_array() !== FALSE){
             return true;
             if(unlink("UPLOAD_DIR".$fileid)){
-                print_err("Filesystem error");
+                trigger_error("Filesystem error");
                 return false;
             }
         }
         else{
-            print_err("Database failure");
+            trigger_error("Database failure");
             return false;
         }
     }
@@ -162,7 +162,7 @@ class UploadedFile{
         }
         if(!($result = $GLOBALS['mysqli']->query("SELECT * FROM dl_time_exceptions
         WHERE userid = {$userid} AND fileid = {$this->get_fileid()} ORDER BY start_time ASC"))){
-            print_err("Database failure");            
+            trigger_error("Database failure");            
             return true;
         }
         $result_array = $result->fetch_array();        
